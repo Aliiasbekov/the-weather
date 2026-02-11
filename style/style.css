@@ -1,0 +1,123 @@
+body{
+    background-color: #252222;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+.container{
+    margin: 2vh auto;
+    max-width: 98vw;
+    height: 96vh;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 15px;
+    color: white;
+}
+a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.title_contain, .list{
+    padding: 20px 40px;
+    background-color: #6A6969;
+    border-radius: 10px;
+}
+
+.title_contain{
+    display: flex;
+    flex-direction: column;
+}
+.title_head{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.city_input{
+    padding: 10px;
+    width: 100%;
+    background-color: #C2D4D3;
+    color: #7E7C7C;
+    border-radius: 50px;
+    outline: none;
+    appearance: none;
+    text-align: center;
+}
+.current_icon{
+    display: flex;
+    justify-content: center;
+}
+.current_icon_img{
+    width: 70%;
+}
+.temp_c{
+    margin: 0;
+    text-align: center;
+    font-weight: 900;
+    font-size: 36px;
+}
+.city{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    font-weight: 700;
+    font-size: 22px;
+}
+.city p{
+    margin: 0;
+}
+.city_info{
+    font-size: 16px;
+}
+.city_info_contain{
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+.city_info_contain p{
+    margin: 0;
+}
+.city_info_weather{
+    width: 22px;
+    height: 30px;
+}
+.city_footer{
+    padding: 15px;
+    background-color: #252222;
+    opacity: 65%;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    box-shadow: 2px 2px 2px black;
+}
+.city_footer img{
+    width: 75%;
+}
+.city_footer h6{
+    font-size: 20px;
+}
+.city_footer_humidity, .city_footer_wild{
+    display: flex;
+}
+.city_footer_humidity_text, .city_footer_wild_text{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.city_footer_humidity_text h6, .city_footer_humidity_text p,
+.city_footer_wild_text h6, .city_footer_wild_text p{
+    margin: 0;
+}
+.list{
+
+}
+
+.list_title a:focus, a:active{
+    text-decoration-line: underline;
+    text-decoration-style: wavy;
+    color: white;
+}

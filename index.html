@@ -5,19 +5,77 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
     <title>Document</title>
 </head>
 <body>
-    <header>
+    <section class="container">
+        <header class="title_contain">
+            <label>
+                <select class="city_input title_head">
+                    <option value="" disabled selected hidden>
+                        Search city...
+                    </option>
+                </select>
+            </label>
+            <div class="current_icon">
+                <img class="current_icon_img" alt="icon" src="">
+            </div>
+            <h3 class="temp_c"></h3>
+            <div class="city">
+                <p class="city_title"></p>
+                <p class="city_day"></p>
+            </div>
+            <hr style="width: 100%">
+            <div class="city_info">
+                <div class="city_info_contain">
+                    <img class="city_info_weather" alt="">
+                    <p class="city_info_weather_title"></p>
+                </div>
+                <div class="city_info_contain">
+                    <img src="./assets/min_temp_Icon.svg" alt="">
+                    <p class="city_info_max_temp"></p>
+                </div>
+                <div class="city_info_contain">
+                    <img src="./assets/max_temp_Icon.svg" alt="">
+                    <p class="city_info_min_temp"></p>
+                </div>
+            </div>
+            <div class="city_footer">
+                <div class="city_footer_humidity">
+                    <div class="city_footer_humidity_icon">
+                        <img src="./assets/water_icon.svg" alt="">
+                    </div>
+                    <div class="city_footer_humidity_text">
+                        <h6 class="city_footer_humidity_text_title"></h6>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="city_footer_wild">
+                    <div class="city_footer_wild_icon">
+                        <img src="./assets/wild_icon.svg" alt="">
+                    </div>
+                    <div class="city_footer_wild_text">
+                        <h6 class="city_footer_wild_text_title"></h6>
+                        <p>Wind speed</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="list">
+            <div class="list_title title_head">
+                <a href="">Today</a>
+                <a href="">Week</a>
+            </div>
+            <div>
+                <h1>1111</h1>
+            </div>
+        </main>
+    </section>
 
-        <select class="city_input">
-
-        </select>
-        <img class="current_icon" >
-        <h1 class="city"></h1>
-        <h3 class="temp_c"></h3>
-    </header>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./index.js"></script>
 </body>

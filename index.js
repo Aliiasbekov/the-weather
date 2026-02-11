@@ -7,46 +7,26 @@ const createAPI = (str) => {
 const weatherAPI = {
     getSports: (city) => createAPI(`sports.json?key=${apiKey}q=${city}`),
     getFuture: (city, dt) => createAPI(`future.json?key=${apiKey}q=${city}&dt=${dt}`),
-    getCurrent: (city) => createAPI(`current.json?q=${city}&key=${apiKey}&aqi=no`)
+    getCurrent: (city) => createAPI(`current.json?q=${city}&key=${apiKey}&aqi=no`),
+    getForecast: (city) => createAPI(`forecast.json?key=${apiKey}&q=${city}&days=${day}&aqi=no&alerts=no`)
 }
-
-const getFutureWeather = async (dt) => {
-    const response = await axios(weatherAPI.getFuture("Bishkek", dt))
-    return response.data
-}
-
-
-// const appendFutureWeather = (text) => {
-//     header.textContent = text
-// }
-//
-// input.addEventListener("change", async (event) => {
-//     const res = await getFutureWeather(event.target.value)
-//     appendFutureWeather(res)
-// })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const header = document.querySelector("header")
 const changeCityInput = document.querySelector(".city_input")
-const currentIcon = document.querySelector(".current_icon")
-const currentCity = document.querySelector(".city")
+const currentIcon = document.querySelector(".current_icon_img")
 const currentTempC = document.querySelector(".temp_c")
+const currentCity = document.querySelector(".city_title")
+const currentCityDay = document.querySelector(".city_day")
+const theWeatherText = document.querySelector(".city_info_weather_title")
+const theWeatherIcon = document.querySelector(".city_info_weather")
+const theWeatherOfMax = document.querySelector(".city_info_max_temp")
+const theWeatherOfMin = document.querySelector(".city_info_min_temp")
+const currentCityHumidity = document.querySelector(".city_footer_humidity_text_title")
+const currentCityWild = document.querySelector(".city_footer_wild_text_title")
 
 const cities = [
+    "Bishkek",
     "New York",
     "London",
     "Paris",
@@ -79,19 +59,71 @@ const cities = [
     "Stockholm"
 ];
 
+const getWeekDay = (dateString) => {
+    const date = new Date(dateString);
+    const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+    return days[date.getDay()];
+};
+
 cities.forEach(el => {
     changeCityInput.innerHTML += `<option value="${el}">${el}</option>`
 })
 
-const getCurrentWeather = async (city = "Bishkek") =>{
+const setIcon = (url) => {
+    currentIcon.src = url
+}
+const setTempC = (num) => {
+    currentTempC.textContent = num
+}
+const setCityTitle = (text) => {
+    currentCity.textContent = text
+}
+const setCityDay = (text) => {
+    currentCityDay.textContent = text
+}
+const setWeatherTitle = (text) => {
+    theWeatherText.textContent = text
+}
+const setWeatherIcon = (url) => {
+    theWeatherIcon.src = url
+}
+const setWeatherOfMax = (text) => {
+    theWeatherOfMax.textContent = text
+}
+const setWeatherOfMin = (text) => {
+    theWeatherOfMin.textContent = text
+}
+const setHumidity = (text) => {
+    currentCityHumidity.textContent = text
+}
+const setWild = (text) => {
+    currentCityWild.textContent = text
+}
+
+
+const getCurrentWeather = async (city = "Naryn") =>{
     const resp = await axios(weatherAPI.getCurrent(city))
     const {data} = resp
     setIcon(data.current.condition.icon)
-    setCityTitle(`${data.location.name}-${data.location.country}`)
-    setTempC(`Температура в Цельсиях:${data.current.temp_c} Температура в Фаренгейтах:${data.current.temp_f}`)
+    setTempC(`${data.current.temp_c} °C`)
+    setCityTitle(`${data.location.name}`)
+    setCityDay(`${getWeekDay(data.location.localtime)}`)
+    setWeatherIcon(data.current.condition.icon)
+    setWeatherTitle(`${data.current.condition.text}`)
+    setHumidity(`${data.current.humidity}%`)
+    setWild(`${data.current.wind_kph}kp/h`)
     return resp.data
 }
 getCurrentWeather()
+
 
 changeCityInput.addEventListener("change", (e) => {
     const {value} = e.target;
@@ -99,47 +131,39 @@ changeCityInput.addEventListener("change", (e) => {
         getCurrentWeather(value)
     }
 })
-const setIcon = (url) => {
-    currentIcon.src = url
-}
-const setCityTitle = (text) => {
-    currentCity.textContent = text
-}
-const setTempC = (num) => {
-    currentTempC.textContent = num
-}
 
 
 
 
 
 
-const forecast = [
-    {
-        temp_c: 2,
-        day: "1"
-    },
-    {
-        temp_c: 1,
-        day: "2"
-    },
-    {
-        temp_c: 2,
-        day: "3"
-    },
-    {
-        temp_c: 1,
-        day: "4"
-    },
-    {
-        temp_c: 2,
-        day: "5"
-    },
-    {
-        temp_c: 1,
-        day: "6"
-    }
-]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Get the CSS variable --color-brand and convert it to hex for ApexCharts
+const getBrandColor = () => {
+    // Get the computed style of the document's root element
+    const computedStyle = getComputedStyle(document.documentElement);
+
+    // Get the value of the --color-brand CSS variable
+    return computedStyle.getPropertyValue('--color-fg-brand').trim() || "#1447E6";
+};
+
+const brandColor = getBrandColor();
 
 const options = {
     chart: {
@@ -187,12 +211,12 @@ const options = {
     series: [
         {
             name: "New users",
-            data: forecast.map(el => el.temp_c),
+            data: [6500, 6418, 6456, 6526, 6356, 6456],
             color: brandColor,
         },
     ],
     xaxis: {
-        categories: forecast.map(el => el.day),
+        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
         labels: {
             show: false,
         },
@@ -206,4 +230,9 @@ const options = {
     yaxis: {
         show: false,
     },
+}
+
+if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
+    const chart = new ApexCharts(document.getElementById("area-chart"), options);
+    chart.render();
 }
