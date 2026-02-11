@@ -8,7 +8,7 @@ const weatherAPI = {
     getSports: (city) => createAPI(`sports.json?key=${apiKey}q=${city}`),
     getFuture: (city, dt) => createAPI(`future.json?key=${apiKey}q=${city}&dt=${dt}`),
     getCurrent: (city) => createAPI(`current.json?q=${city}&key=${apiKey}&aqi=no`),
-    getForecast: (city) => createAPI(`forecast.json?key=${apiKey}&q=${city}&days=${day}&aqi=no&alerts=no`)
+    getForecast: (city, days) => createAPI(`forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no&alerts=no`)
 }
 
 
@@ -24,7 +24,7 @@ const theWeatherOfMax = document.querySelector(".city_info_max_temp")
 const theWeatherOfMin = document.querySelector(".city_info_min_temp")
 const currentCityHumidity = document.querySelector(".city_footer_humidity_text_title")
 const currentCityWild = document.querySelector(".city_footer_wild_text_title")
-
+const weatherOfDay = document.querySelector(".list_of_week_contents")
 // LIST
 // const currentMonday = document.querySelector(".list_content_title")
 // const currentMondayIcon = document.querySelector(".list_content_title")
@@ -135,8 +135,7 @@ const setTempOfWeek = (selector, text) =>{
 
 
 const getCurrentWeather = async (city = "Naryn") =>{
-    const resp = await axios(weatherAPI.getCurrent(city))
-    const {data} = resp
+    const {data} = await axios(weatherAPI.getCurrent(city))
     setIcon(data.current.condition.icon)
     setTempC(`${data.current.temp_c} °C`)
     setCityTitle(`${data.location.name}`)
@@ -148,14 +147,38 @@ const getCurrentWeather = async (city = "Naryn") =>{
     setDayOfWeek(".list_content_title1", getWeekDay(data.location.localtime))
     setIconOfWeek(".list_content_icon1", data.current.condition.icon)
     setTempOfWeek(".list_content_temp1", data.current.temp_c)
-    return resp.data
+    return data
 }
 getCurrentWeather()
 
+const weatherOfWeek = async(city = "Naryn") => {
+    try{
+        const resp = await axios(weatherAPI.getForecast(city, 7))
+        weatherOfDay.innerHTML = ""
+        resp.data.forecast.forecastday.forEach((el => {
+            weatherOfDay.innerHTML += `
+           <div class="list_of_week_content">
+                        <p class="list_content_title2">${getWeekDay(el.date)}</p>
+                        <img src=${el.day.condition.icon} class="list_content_icon2" alt="">
+                        <p class="list_content_temp2">${el.day.maxtemp_c}°</p>
+                    </div> 
+        `
+        }))
+        setWeatherOfMin(`Min Temperature: ${resp.data.forecast.forecastday[0].day.mintemp_c} °C`)
+        setWeatherOfMax(`Max Temperature: ${resp.data.forecast.forecastday[0].day.maxtemp_c} °C`)
+        return resp.data
+
+    }catch(e){
+        console.log(e.message)
+    }
+}
+weatherOfWeek()
 
 changeCityInput.addEventListener("change", (e) => {
     const {value} = e.target;
     if (value.length > 1){
         getCurrentWeather(value)
+        weatherOfWeek(value)
     }
 })
+
