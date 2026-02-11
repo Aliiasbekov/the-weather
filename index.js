@@ -25,6 +25,11 @@ const theWeatherOfMin = document.querySelector(".city_info_min_temp")
 const currentCityHumidity = document.querySelector(".city_footer_humidity_text_title")
 const currentCityWild = document.querySelector(".city_footer_wild_text_title")
 
+// LIST
+// const currentMonday = document.querySelector(".list_content_title")
+// const currentMondayIcon = document.querySelector(".list_content_title")
+// const currentMondayTemp = document.querySelector(".list_content_temp")
+
 const cities = [
     "Bishkek",
     "New York",
@@ -108,6 +113,26 @@ const setWild = (text) => {
     currentCityWild.textContent = text
 }
 
+// LIST
+const setDayOfWeek = (selector, text) =>{
+    const el = document.querySelector(selector)
+    if(el){
+        return el.textContent = text
+    }
+}
+const setIconOfWeek = (selector, url) =>{
+    const el = document.querySelector(selector)
+    if(el){
+        return el.src = url
+    }
+}
+const setTempOfWeek = (selector, text) =>{
+    const el = document.querySelector(selector)
+    if(el){
+        return el.textContent = `${text}°`
+    }
+}
+
 
 const getCurrentWeather = async (city = "Naryn") =>{
     const resp = await axios(weatherAPI.getCurrent(city))
@@ -120,6 +145,9 @@ const getCurrentWeather = async (city = "Naryn") =>{
     setWeatherTitle(`${data.current.condition.text}`)
     setHumidity(`${data.current.humidity}%`)
     setWild(`${data.current.wind_kph}kp/h`)
+    setDayOfWeek(".list_content_title1", getWeekDay(data.location.localtime))
+    setIconOfWeek(".list_content_icon1", data.current.condition.icon)
+    setTempOfWeek(".list_content_temp1", data.current.temp_c)
     return resp.data
 }
 getCurrentWeather()
@@ -131,108 +159,3 @@ changeCityInput.addEventListener("change", (e) => {
         getCurrentWeather(value)
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Get the CSS variable --color-brand and convert it to hex for ApexCharts
-const getBrandColor = () => {
-    // Get the computed style of the document's root element
-    const computedStyle = getComputedStyle(document.documentElement);
-
-    // Get the value of the --color-brand CSS variable
-    return computedStyle.getPropertyValue('--color-fg-brand').trim() || "#1447E6";
-};
-
-const brandColor = getBrandColor();
-
-const options = {
-    chart: {
-        height: "100%",
-        maxWidth: "100%",
-        type: "area",
-        fontFamily: "Inter, sans-serif",
-        dropShadow: {
-            enabled: false,
-        },
-        toolbar: {
-            show: false,
-        },
-    },
-    tooltip: {
-        enabled: true,
-        x: {
-            show: false,
-        },
-    },
-    fill: {
-        type: "gradient",
-        gradient: {
-            opacityFrom: 0.55,
-            opacityTo: 0,
-            shade: brandColor,
-            gradientToColors: [brandColor],
-        },
-    },
-    dataLabels: {
-        enabled: false,
-    },
-    stroke: {
-        width: 6,
-    },
-    grid: {
-        show: false,
-        strokeDashArray: 4,
-        padding: {
-            left: 2,
-            right: 2,
-            top: 0
-        },
-    },
-    series: [
-        {
-            name: "New users",
-            data: [6500, 6418, 6456, 6526, 6356, 6456],
-            color: brandColor,
-        },
-    ],
-    xaxis: {
-        categories: ['01 February', '02 February', '03 February', '04 February', '05 February', '06 February', '07 February'],
-        labels: {
-            show: false,
-        },
-        axisBorder: {
-            show: false,
-        },
-        axisTicks: {
-            show: false,
-        },
-    },
-    yaxis: {
-        show: false,
-    },
-}
-
-if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
-    const chart = new ApexCharts(document.getElementById("area-chart"), options);
-    chart.render();
-}

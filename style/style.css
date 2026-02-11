@@ -85,8 +85,7 @@ a{
 }
 .city_footer{
     padding: 15px;
-    background-color: #252222;
-    opacity: 65%;
+    background-color: #1E1E1E;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -112,12 +111,70 @@ a{
 .city_footer_wild_text h6, .city_footer_wild_text p{
     margin: 0;
 }
-.list{
 
+
+/*SECTION lIST*/
+.list_title, .list_container_title{
+    margin-bottom: 30px;
 }
-
 .list_title a:focus, a:active{
     text-decoration-line: underline;
     text-decoration-style: wavy;
     color: white;
+}
+.list_of_week_contents{
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+}
+.list_of_week_content p{
+    margin: 0;
+}
+.list_of_week_content{
+    padding: 10px;
+    background-color: #1E1E1E;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+.list_container{
+    display: grid;
+    gap: 15px;
+}
+.list_container_infos{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+.list_container_info, .list_graphic{
+    padding: 10px;
+    background-color: #1E1E1E;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+.list_container_info p, .list_graphic p, .sun_times p,
+.list_graphic h5, .sun_times h6{
+    margin: 0;
+}
+.list_graphics{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.sun_times{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.sunrise, .sunset{
+    display: flex;
+    gap: 15px;
+}
+.sunset_contain, .sunrise_contain{
+    color: #6A6969;
 }
