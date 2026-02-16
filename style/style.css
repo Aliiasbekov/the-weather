@@ -1,33 +1,37 @@
+
 body{
-    background-color: #191B1F;
+    background-color: var(--global-bg-color);
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    overflow-y: hidden;
-    height: 100vh;
 }
-.container{
-    margin: 2vh auto;
-    max-width: 98vw;
-    overflow-y: hidden;
-    height: 96%;
-    display: grid;
-    justify-content: start;
-    grid-template-columns: 2fr 5fr;
-    gap: 15px;
-    color: white;
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+h1,h2,h3,h4,h5,h6,p{
+    margin: 0;
 }
 a{
-    color: white;
+    color: var(--primary-color);
     text-decoration: none;
     cursor: pointer;
+}
+.container{
+    width: 96vw;
+    margin: 2vh auto;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    gap: 15px;
+    color: var(--primary-color);
 }
 
 .title_contain, .list{
     padding: 20px 40px;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
+    background-color: var(--primary-bg-color);
+    border: 2px solid var(--primary-bg-color);
+    border-radius: var(--primary-radius);
 }
 
 .title_contain{
@@ -39,15 +43,30 @@ a{
     align-items: center;
     gap: 20px;
 }
-.city_input{
-    padding: 10px;
+.city_select_contain{
+    display: flex;
     width: 100%;
-    background-color: #C2D4D3;
-    color: #7E7C7C;
-    border-radius: 50px;
+    background-color: var(--select-bg-color);
+    border-radius: var(--secondary-radius);
+    overflow: hidden;
+}
+.city_search_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    border: none;
+    background: transparent;
+}
+.city_input{
+    flex: 1;
+    padding: 10px;
+    border: none;
     outline: none;
+    background: transparent;
+    color: #7E7C7C;
     appearance: none;
-    text-align: center;
+    text-align: left;
 }
 .current_icon{
     display: flex;
@@ -90,13 +109,13 @@ a{
 }
 .city_footer{
     padding: 15px;
-    background-color: rgba(37, 34, 34, 0.65);
-    border-radius: 10px;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--primary-radius);
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
-    box-shadow: rgba(0, 0, 0, 1) 4px 9px 8px -6px;
+    box-shadow: var(--box-shadow);
 }
 .city_footer img{
     width: 75%;
@@ -111,10 +130,6 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-}
-.city_footer_humidity_text h6, .city_footer_humidity_text p,
-.city_footer_wild_text h6, .city_footer_wild_text p{
-    margin: 0;
 }
 
 
@@ -138,50 +153,199 @@ a{
 }
 .list_of_week_content{
     padding: 10px;
-    background-color: rgba(37, 34, 34, 0.65);
+    background-color: var(--secondary-bg-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 1) 4px 9px 8px -6px;
+    border-radius: var(--primary-radius);
+    box-shadow: var(--box-shadow);
 }
 .list_container{
     display: grid;
     gap: 15px;
-    grid-template-rows: repeat(2, 1fr);
-
 }
 .list_container_infos{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
+.air_quality_text{
+    color: #009966;
+}
+.uv_index_text{
+    color: #F5CD2F;
+}
 .list_container_info, .list_graphic{
     padding: 10px;
-    background-color: rgba(37, 34, 34, 0.65);
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 1) 4px 9px 8px -6px;
+    background-color: var(--secondary-bg-color);
+    border-radius: var(--primary-radius);
+    box-shadow: var(--box-shadow);
 }
-.list_container_info p, .list_graphic p, .sun_times p,
-.list_graphic h5, .sun_times h6{
-    margin: 0;
+.list_graphic canvas{
+    width: 100% !important;
+    height: 18vh !important;
+}
+
+.list_container_info p{
+    font-size: 14px;
+}
+.list_contents{
+    display: flex;
+    justify-content: space-between;
+}
+.list_content{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.list_content h5{
+    font-size: 32px;
+    font-weight: 900;
 }
 .list_graphics{
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 15px;
 }
-
+.list_graphic_title{
+    margin-bottom: 15px;
+}
 .sun_times{
     padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+.sun_times p{
+    color: var(--primary-color);
+}
 .sunrise, .sunset{
     display: flex;
     gap: 15px;
 }
-.sunset_contain, .sunrise_contain{
+.sun_contain{
     color: #6A6969;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*////////////////////////////////////////*/
+
+@media (max-width: 1124px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+    .current_icon_img{
+        width: 30%;
+    }
+    .city{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .city_info{
+        display: flex;
+        justify-content: space-around;
+        gap: 15px;
+    }
+    .city_footer{
+        justify-content: space-around;
+    }
+    .list_graphics {
+        grid-template-columns: 1fr;
+    }
+    .list_graphic_title, .list_container_title,
+    .list_graphic h5{
+        text-align: center;
+    }
+    .list_container_infos {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .list_of_week_contents {
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+    }
+
+    .title_contain,
+    .list {
+        padding: 20px;
+    }
+    .sun_times{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 95vw;
+        margin: 1vh auto;
+        gap: 10px;
+    }
+
+    .title_contain,
+    .list {
+        padding: 15px;
+    }
+
+    .list_of_week_contents {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .city {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 18px;
+        gap: 5px;
+    }
+
+    .temp_c {
+        font-size: 28px;
+    }
+
+    .list_content h5 {
+        font-size: 24px;
+    }
+
+    .city_footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .city_footer_humidity,
+    .city_footer_wild {
+        justify-content: center;
+    }
+
+    .list_graphic canvas {
+        height: 160px !important;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .list_of_week_contents {
+        grid-template-columns: 2fr 2fr 2fr;
+    }
+
+    .city_select_contain {
+        flex-direction: row;
+    }
+
+    .city_input {
+        font-size: 14px;
+    }
+
+    .temp_c {
+        font-size: 24px;
+    }
+
+    .list_graphic canvas {
+        height: 140px !important;
+    }
 }

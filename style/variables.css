@@ -1,0 +1,10 @@
+:root{
+    --global-bg-color: #191B1F;
+    --primary-bg-color: rgba(255, 255, 255, 0.1);
+    --secondary-bg-color: rgba(37, 34, 34, 0.65);
+    --primary-radius: 10px;
+    --secondary-radius: 50px;
+    --primary-color: white;
+    --box-shadow: rgba(0, 0, 0, 1) 4px 9px 8px -6px;
+    --select-bg-color: #C2D4D3;
+}

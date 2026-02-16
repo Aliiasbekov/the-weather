@@ -8,19 +8,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style/variables.css">
     <link rel="stylesheet" href="./style/style.css">
     <title>Document</title>
 </head>
 <body>
     <section class="container">
         <header class="title_contain">
-            <label>
+            <div class="city_select_contain">
+                <button class="city_search_btn">
+                    <img src="./assets/Search_icon.svg" alt="">
+                </button>
                 <select class="city_input title_head">
                     <option value="" disabled selected hidden>
                         Search city...
                     </option>
                 </select>
-            </label>
+            </div>
             <div class="current_icon">
                 <img class="current_icon_img" alt="icon" src="">
             </div>
@@ -82,54 +86,57 @@
                         <p>
                             Air Quality Index
                         </p>
-                        <div>
-                            <div>
-                                <h5></h5>
-                                <p></p>
+                        <div class="list_contents">
+                            <div class="list_container_air_quality list_content">
+                                <h5 class="air_quality_num"></h5>
+                                <p class="air_quality_text"></p>
                             </div>
-                            <img src="" alt="">
+                            <img src="./assets/air-pollution.svg" alt="">
                         </div>
                     </div>
                     <div class="list_container_info">
                         <p>
-                            Air Quality Index
+                            UV Index
                         </p>
-                        <div>
-                            <div>
-                                <h5></h5>
-                                <p></p>
+                        <div class="list_contents">
+                            <div class="list_container_uv_index list_content">
+                                <h5 class="uv_index_num"></h5>
+                                <p class="uv_index_text"></p>
                             </div>
-                            <img src="" alt="">
+                            <img src="./assets/uv_index.svg" alt="">
                         </div>
                     </div>
                     <div class="list_container_info">
                         <p>
-                            Air Quality Index
+                            Pressure (hpa)
                         </p>
-                        <div>
-                            <div>
-                                <h5></h5>
-                                <p></p>
+                        <div class="list_contents">
+                            <div class="list_container_pressure list_content">
+                                <h5 class="pressure_num"></h5>
+                                <p class="pressure_text"></p>
                             </div>
-                            <img src="" alt="">
+                            <img src="./assets/barometer.svg" alt="">
                         </div>
                     </div>
                 </div>
                 <div class="list_graphics">
-                    <div class="list_graphic">a</div>
+                    <div class="list_graphic">
+                        <h2 class="list_graphic_title">Precipitation</h2>
+                        <canvas id="humidityChart"></canvas>
+                    </div>
                     <div class="list_graphic">
                         <h5>Sunrise & Sunset</h5>
                         <div class="sun_times">
                             <div class="sunrise">
                                 <img src="./assets/sunrise_Icon.svg" alt="">
-                                <div class="sunrise_contain">
+                                <div class="sunrise_contain sun_contain">
                                     <h6>Sunrise</h6>
                                     <p class="sunrise_time"></p>
                                 </div>
                             </div>
                             <div class="sunset">
                                 <img src="./assets/sunset_Icon.svg" alt="">
-                                <div class="sunset_contain">
+                                <div class="sunset_contain sun_contain">
                                     <h6>Sunset</h6>
                                     <p class="sunset_time"></p>
                                 </div>
@@ -142,6 +149,7 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./index.js"></script>
 </body>
 </html>
