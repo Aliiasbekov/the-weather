@@ -206,7 +206,6 @@ const getCurrentWeather = async (city = "Naryn") =>{
 
     return data
 }
-getCurrentWeather()
 
 
 let humidityChart = null;
@@ -295,7 +294,13 @@ const weatherOfWeek = async(city = "Naryn") => {
         console.log(e.message)
     }
 }
-weatherOfWeek()
+
+const runApp = () => {
+    weatherOfWeek()
+    getCurrentWeather()
+}
+runApp()
+
 
 changeCityInput.addEventListener("change", (e) => {
     const {value} = e.target;
